@@ -1,0 +1,90 @@
+package com.sonia.tp.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.sonia.tp.model.Article;
+import com.sonia.tp.service.ArticleService;
+
+public class ArticleController {
+
+	@Autowired
+	private ArticleService articleService;
+
+	/**
+	 * Read - Get all Articles by User
+	 * 
+	 * @param id The id of the User
+	 * @return An list of Articles object by user
+	 */
+	@GetMapping("/articles/{id}")
+	public List<Article> getArticlesByUser(@PathVariable final Long id) {
+		return articleService.getArticlesByUser(id);
+	}
+
+	/**
+	 * Create - Add a new Article
+	 * 
+	 * @param User An object Article
+	 * @return The Article object saved
+	 */
+	@PostMapping("/articles")
+	public Article createArticle(@RequestBody Article Article) {
+		return articleService.saveArticle(Article);
+	}
+	/**
+	 * Read - Get one Article 
+	 * @param id The id of the Article
+	 * @return An Article object if found, otherwise null
+	 */
+	@GetMapping("/articles/{id}")
+	public Article getArticle(@PathVariable("") final Long id) {
+	    Optional<Article> article = articleService.getArticle(id);
+	    return article.orElse(null);
+	}
+
+	/**
+	 * Update - Update an existing Article
+	 * @param id - The id of the Article to update
+	 * @param article - The updated Article object
+	 * @return The updated Article, or null if not found
+	 */
+	@PutMapping("/articles/{id}")
+	public Article updateArticle(@PathVariable("") final Long id, @RequestBody Article article) {
+	    Optional<Article> optionalArticle = articleService.getArticle(id);
+	    if (optionalArticle.isPresent()) {
+	        Article currentArticle = optionalArticle.get();
+
+	        if (article.getTitle() != null) {
+	            currentArticle.setTitle(article.getTitle());
+	        }
+	        if (article.getContent() != null) {
+	            currentArticle.setContent(article.getContent());
+	        }
+	        if (article.getUser() != null) {
+	            currentArticle.setUser(article.getUser());
+	        }
+
+	        return articleService.saveArticle(currentArticle);
+	    }
+	    return null;
+	}
+
+	/**
+	 * Delete - Delete an Article
+	 * @param id - The id of the Article to delete
+	 */
+	@DeleteMapping("/articles/{id}")
+	public void deleteArticle(@PathVariable("") final Long id) {
+	    articleService.deleteArticle(id);
+	}
+
+}

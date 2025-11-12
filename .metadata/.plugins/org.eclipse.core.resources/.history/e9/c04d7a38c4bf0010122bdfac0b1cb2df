@@ -1,0 +1,17 @@
+package com.sonia.tp.repository;
+
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.sonia.tp.model.Article;
+
+@Repository
+public interface ArticleRepository extends JpaRepository<Article, Long> {
+	Optional<Article> findByname(String title);
+
+	Boolean existsByname(String title);
+
+	Boolean existsByEmail(String content);
+}

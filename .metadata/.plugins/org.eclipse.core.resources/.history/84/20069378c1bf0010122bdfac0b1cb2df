@@ -1,0 +1,28 @@
+package com.sonia.tp.model;
+
+	
+	import jakarta.persistence.*;
+	import jakarta.validation.constraints.NotBlank;
+	import jakarta.validation.constraints.Size;
+
+	@Entity
+	@Table(
+	    name = "Article",
+	    uniqueConstraints = {
+	        @UniqueConstraint(columnNames = "name"),
+	        @UniqueConstraint(columnNames = "description")
+	    }
+	)
+	public class Article {
+
+	  
+	    public Article() {
+	    }
+
+	  
+	    public Article(String name, String description) {
+	        this.username = username;
+	        this.email = email;
+	        this.password = password;
+	    }
+}

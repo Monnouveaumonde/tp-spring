@@ -1,0 +1,30 @@
+package com.sonia.tp.service;
+
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.sonia.tp.model.Article;
+import com.sonia.tp.repository.ArticleRepository;
+
+@Service
+public class ArticleService {
+	@Autowired
+	private ArticleRepository userRepository;
+
+	public Optional<Article> getArticle(final Long id) {
+		return ArticleRepository.findById(id);
+	}
+
+	public Iterable<Article> getUsers() {
+		return userRepository.findAll();
+	}
+
+	public void deleteUser(final Long id) {
+		userRepository.deleteById(id);
+	}
+
+	public Article saveArticle(Article article) {
+		Article savedArticle = articleRepository.save(article);
+		return savedArticle;
+	}
+}

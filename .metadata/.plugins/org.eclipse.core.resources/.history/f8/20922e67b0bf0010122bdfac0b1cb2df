@@ -1,0 +1,5 @@
+package com.sonia.tp.repository;
+
+public interface UserRepository {
+
+}

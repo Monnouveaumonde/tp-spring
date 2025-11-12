@@ -1,0 +1,34 @@
+package com.sonia.tp.model;
+
+	
+	import jakarta.persistence.*;
+	import jakarta.validation.constraints.NotBlank;
+	import jakarta.validation.constraints.Size;
+
+	@Entity
+	@Table(
+	    name = "Article",
+	    uniqueConstraints = {
+	        @UniqueConstraint(columnNames = "title"),
+	        @UniqueConstraint(columnNames = "description")
+	    }
+	)
+	public class Article {
+
+	  
+	    public Article() {
+	    }
+
+	  
+	    public Article(String title, String description) {
+	        this.title = title;
+	        this.description = desciption;
+	    }
+	    @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    private Long id;
+	    
+	    @NotBlank
+	    @Size(max = 20)
+	    private String title;
+}

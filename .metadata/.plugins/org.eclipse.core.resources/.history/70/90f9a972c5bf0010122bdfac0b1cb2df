@@ -1,0 +1,36 @@
+package com.sonia.tp.controller;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.sonia.tp.model.User;
+import com.sonia.tp.service.ArticleService;
+
+public class ArticleController {
+
+	@Autowired
+    private ArticleService articleService;
+	
+	 /**
+	    * Read - Get all articles
+	    * @return - An Iterable object of Article full filled
+	    */
+	    @GetMapping("/articles")
+	    public Iterable<Article> getArticles() {
+	        return articleService.getArticles();
+	    }
+	    
+	    /**
+		 * Create - Add a new Article
+		 * @param User An object Article
+		 * @return The Article object saved
+		 */
+		@PostMapping("/articles")
+		public Article createArticle(@RequestBody Article Article) {
+			return articleService.saveArticle(Article);
+		}
+}

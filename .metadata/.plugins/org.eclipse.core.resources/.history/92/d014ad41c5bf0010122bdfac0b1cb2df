@@ -1,0 +1,13 @@
+package com.sonia.tp.controller;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.sonia.tp.service.ArticleService;
+
+public class ArticleController {
+
+	@Autowired
+    private ArticleService articleService;
+}
