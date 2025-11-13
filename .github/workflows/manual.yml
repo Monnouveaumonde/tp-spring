@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build
-        run: mvn -f ./pom.xml compile
+        run: mvn -f tp-spring/pom.xml compile
 
   test:
     runs-on: ubuntu-latest
